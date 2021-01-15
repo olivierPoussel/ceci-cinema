@@ -10,20 +10,26 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Role
 {
-
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+    
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $nom;
 
     /**
-     * @ORM\Id
+     * 
      * @ORM\ManyToOne(targetEntity=Film::class, inversedBy="roles")
      */
     private $film;
 
     /**
-     * @ORM\Id
+     * 
      * @ORM\ManyToOne(targetEntity=Acteur::class, inversedBy="roles")
      */
     private $acteur;
@@ -62,5 +68,13 @@ class Role
         $this->acteur = $acteur;
 
         return $this;
+    }
+
+    /**
+     * Get the value of id
+     */ 
+    public function getId()
+    {
+        return $this->id;
     }
 }

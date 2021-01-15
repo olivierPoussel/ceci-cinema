@@ -11,24 +11,43 @@
           <span class="sr-only">(current)</span>
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ path('acteur_index') }}">Acteur</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ path('realisateur_index') }}">Réalisateur</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ path('salle_index') }}">Salle</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ path('film_index') }}">Film</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ path('seance_index') }}">Seance</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ path('role_index') }}">Role</a>
-      </li>
+      {% if app.user %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('acteur_index') }}">Acteur</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('realisateur_index') }}">Réalisateur</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('salle_index') }}">Salle</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('film_index') }}">Film</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('seance_index') }}">Seance</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('role_index') }}">Role</a>
+        </li>
+          {% if is_granted('ROLE_ADMIN') %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ path('user_index') }}">User</a>
+            </li>
+          {% endif %}
+      {% endif %}
+      {% if app.user %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('app_logout') }}">Se déconnecter</a>
+        </li>
+      {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('user_new') }}">Inscription</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ path('app_login') }}">Se connecter</a>
+        </li>
+      {% endif %}
     </ul>
   </div>
 </nav>

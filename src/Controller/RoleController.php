@@ -49,7 +49,7 @@ class RoleController extends AbstractController
     }
 
     /**
-     * @Route("/{film}", name="role_show", methods={"GET"})
+     * @Route("/{id}", name="role_show", methods={"GET"})
      */
     public function show(Role $role): Response
     {
@@ -59,7 +59,7 @@ class RoleController extends AbstractController
     }
 
     /**
-     * @Route("/{film}/edit", name="role_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="role_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Role $role): Response
     {
@@ -79,11 +79,11 @@ class RoleController extends AbstractController
     }
 
     /**
-     * @Route("/{film}", name="role_delete", methods={"DELETE"})
+     * @Route("/{id}", name="role_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Role $role): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$role->getFilm(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$role->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($role);
             $entityManager->flush();

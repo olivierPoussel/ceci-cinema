@@ -12,7 +12,7 @@ class Seance
 {
     /**
      * @ORM\Id
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     private $dateSeance;
 

@@ -21,7 +21,7 @@ class SeanceType extends AbstractType
         $builder
             ->add('dateSeance', DateTimeType::class, [
                 'widget' => 'single_text',
-                'html5' => false,
+                // 'html5' => false,
             ])
             ->add('film', EntityType::class, [
                 'class' => Film::class,

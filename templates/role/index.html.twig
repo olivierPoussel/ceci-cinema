@@ -17,8 +17,8 @@
             <tr>
                 <td>{{ role.nom }}</td>
                 <td>
-                    <a href="{{ path('role_show', {'film': role.film}) }}">show</a>
-                    <a href="{{ path('role_edit', {'film': role.film}) }}">edit</a>
+                    <a href="{{ path('role_show', {'id': role.id}) }}">show</a>
+                    <a href="{{ path('role_edit', {'id': role.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
