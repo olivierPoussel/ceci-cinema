@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Seance{% endblock %}
+
+{% block body %}
+    <h1>Seance</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>DateSeance</th>
+                <td>{{ seance.dateSeance ? seance.dateSeance|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('seance_index') }}">back to list</a>
+
+    <a href="{{ path('seance_edit', {'dateSeance': seance.dateSeance}) }}">edit</a>
+
+    {{ include('seance/_delete_form.html.twig') }}
+{% endblock %}

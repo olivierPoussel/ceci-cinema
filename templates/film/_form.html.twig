@@ -1,0 +1,16 @@
+{{ form_start(form) }}
+
+    {# {{form(form)}} #}
+    {{form_row(form.titre)}}
+    {{form_row(form.duree)}}
+    {{form_row(form.realisateur)}}    
+    
+    {{form_label(form.roles)}}
+    <ul class="roles" data-prototype="{{ form_widget(form.roles.vars.prototype)|e('html_attr') }}">
+        {% for role in form.roles %}
+            <li>{{ form_row(role.name) }}</li>
+        {% endfor %}
+    </ul>
+
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
