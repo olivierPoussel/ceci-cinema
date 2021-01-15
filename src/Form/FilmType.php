@@ -25,7 +25,7 @@ class FilmType extends AbstractType
                 'choice_value' => 'id',
             ])
             ->add('roles', CollectionType::class, [
-                'entry_type' => RoleType::class,
+                'entry_type' => RoleFilmType::class,
                 'entry_options' => ['label' => false],
                 'allow_add' => true,
                 'by_reference' => false,

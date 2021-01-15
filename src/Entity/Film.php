@@ -35,7 +35,7 @@ class Film
     private $realisateur;
 
     /**
-     * @ORM\OneToMany(targetEntity=Role::class, mappedBy="film")
+     * @ORM\OneToMany(targetEntity=Role::class, mappedBy="film", cascade={"persist", "remove"})
      */
     private $roles;
 
