@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 class ActeurOriginController extends AbstractController
 {
     /**
-     * @Route("/", name="index_acteur")
+     * @Route("/origin", name="index_origin_acteur")
      *
      * @return Response
      */
@@ -28,7 +28,7 @@ class ActeurOriginController extends AbstractController
     }
 
     /**
-     * @Route("/acteur/create", name="create_acteur")
+     * @Route("/origin/acteur/create", name="create_origin_acteur")
      *
      * @return Response
      */
