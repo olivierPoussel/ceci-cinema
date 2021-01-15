@@ -2,8 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\SeanceRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\SeanceRepository;
+use DateTime;
 
 /**
  * @ORM\Entity(repositoryClass=SeanceRepository::class)
@@ -12,28 +14,35 @@ class Seance
 {
     /**
      * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+    
+    /**
+     * 
      * @ORM\Column(type="datetime")
      */
     private $dateSeance;
 
     /**
-     * @ORM\Id
+     * 
      * @ORM\ManyToOne(targetEntity=Film::class, inversedBy="seances")
      */
     private $film;
 
     /**
-     * @ORM\Id
+     * 
      * @ORM\ManyToOne(targetEntity=Salle::class, inversedBy="seances")
      */
     private $salle;
 
-    public function getDateSeance(): ?\DateTimeInterface
+    public function getDateSeance(): ?DateTime
     {
         return $this->dateSeance;
     }
 
-    public function setDateSeance(\DateTimeInterface $dateSeance): self
+    public function setDateSeance(DateTime $dateSeance): self
     {
         $this->dateSeance = $dateSeance;
 
@@ -62,5 +71,13 @@ class Seance
         $this->salle = $salle;
 
         return $this;
+    }
+
+    /**
+     * Get the value of id
+     */ 
+    public function getId()
+    {
+        return $this->id;
     }
 }

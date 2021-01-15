@@ -11,12 +11,20 @@
                 <th>DateSeance</th>
                 <td>{{ seance.dateSeance ? seance.dateSeance|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
+            <tr>
+                <th>Film</th>
+                <td>{{ seance.film.titre }}</td>
+            </tr>
+            <tr>
+                <th>Salle</th>
+                <td>{{ seance.salle.nom }}</td>
+            </tr>
         </tbody>
     </table>
 
     <a href="{{ path('seance_index') }}">back to list</a>
 
-    <a href="{{ path('seance_edit', {'dateSeance': seance.dateSeance}) }}">edit</a>
+    <a href="{{ path('seance_edit', {'id': seance.id}) }}">edit</a>
 
     {{ include('seance/_delete_form.html.twig') }}
 {% endblock %}

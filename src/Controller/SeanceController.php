@@ -49,7 +49,7 @@ class SeanceController extends AbstractController
     }
 
     /**
-     * @Route("/{dateSeance}", name="seance_show", methods={"GET"})
+     * @Route("/{id}", name="seance_show", methods={"GET"})
      */
     public function show(Seance $seance): Response
     {
@@ -59,7 +59,7 @@ class SeanceController extends AbstractController
     }
 
     /**
-     * @Route("/{dateSeance}/edit", name="seance_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="seance_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Seance $seance): Response
     {
@@ -79,11 +79,11 @@ class SeanceController extends AbstractController
     }
 
     /**
-     * @Route("/{dateSeance}", name="seance_delete", methods={"DELETE"})
+     * @Route("/{id}", name="seance_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Seance $seance): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$seance->getDateSeance(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$seance->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($seance);
             $entityManager->flush();

@@ -23,13 +23,11 @@ class Role
     private $nom;
 
     /**
-     * 
      * @ORM\ManyToOne(targetEntity=Film::class, inversedBy="roles")
      */
     private $film;
 
     /**
-     * 
      * @ORM\ManyToOne(targetEntity=Acteur::class, inversedBy="roles")
      */
     private $acteur;
