@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{film.titre}}{% endblock %}
+
+{% block body %}
+<h1>{{film.titre}}</h1>
+<h2>Durée : {{film.duree}}</h2>
+
+<h2>Réalisateur</h2> 
+<p>{{film.realisateur.prenom}} {{film.realisateur.nom}}</p>
+
+<h2>Acteur</h2>
+    <div class="list-group">
+    {% for role in film.roles %}
+        <a href="{{path('acteur_detail', {id: role.acteur.id})}}" class="list-group-item list-group-item-action">{{role.acteur.prenom}} {{role.acteur.nom}} : {{role.nom}}</a>
+    {% endfor %}
+    </div>    
+
+<h3>Prochaine séance :</h3> 
+...
+{% endblock %}

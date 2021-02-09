@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Acteur;
 use App\Form\Acteur1Type;
@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/acteur")
+ * @Route("admin/acteur")
  */
 class ActeurController extends AbstractController
 {

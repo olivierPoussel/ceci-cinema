@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Realisateur;
 use App\Form\RealisateurType;
@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/realisateur")
+ * @Route("admin/realisateur")
  */
 class RealisateurController extends AbstractController
 {

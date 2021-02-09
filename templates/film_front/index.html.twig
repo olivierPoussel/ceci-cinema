@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fims
+{% endblock %}
+
+{% block body %}
+    <section class="d-flex justify-content-center">
+	{% for film in films %}
+		<div class="card border-primary mb-3" style="max-width: 20rem;">
+			<div class="card-header">{{film.realisateur.nom}}</div>
+			<div class="card-body">
+				<h4 class="card-title"><a href="{{ path('film_detail', {'id': film.id})}}">{{film.titre}}</a></h4>
+                <h5>durée: {{film.duree}}</h5>
+				<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+			</div>
+		</div>
+	{% endfor %}
+    </section>
+{% endblock %}
