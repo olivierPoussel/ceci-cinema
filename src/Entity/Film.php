@@ -6,12 +6,16 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\FilmRepository;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=FilmRepository::class)
- * @ApiResource
+ * @ApiResource(
+ *  collectionOperations={"get", "post"},
+ *  itemOperations={"get"}
+ * )
  */
 class Film
 {
@@ -54,6 +58,8 @@ class Film
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="film")
+     * @Groups({"film:read"})
+     * @ApiSubresource(maxDepth=1)
      */
     private $comments;
 

@@ -2,16 +2,26 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\PrePersist;
 use App\Repository\CommentRepository;
-use DateTime;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CommentRepository::class)
  * @HasLifecycleCallbacks
+ * @ApiResource(
+ * subresourceOperations={
+ *     "api_film_comment_get_subresource"={
+ *         "method"="GET",
+ *         "normalization_context"={"groups"={"read"}}
+ *     }
+ * }
+ * )
  */
 class Comment
 {
@@ -19,6 +29,7 @@ class Comment
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("read")
      */
     private $id;
 
@@ -29,6 +40,7 @@ class Comment
      *  min = 5, 
      *  minMessage = "Your first name must be at least {{ limit }} characters long"
      * )
+     * @Groups("read")
      */
     private $content;
 
@@ -45,6 +57,7 @@ class Comment
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups("read")
      */
     private $creatAt;
 
