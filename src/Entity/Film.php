@@ -2,13 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\FilmRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\FilmRepository;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=FilmRepository::class)
+ * @ApiResource
  */
 class Film
 {
@@ -16,26 +19,31 @@ class Film
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"film:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"film:read"})
      */
     private $titre;
 
     /**
      * @ORM\Column(type="integer")
+     * @Groups({"film:read"})
      */
     private $duree;
 
     /**
      * @ORM\ManyToOne(targetEntity=Realisateur::class, inversedBy="films")
+     * @Groups({"film:read", "film:short"})
      */
     private $realisateur;
 
     /**
      * @ORM\OneToMany(targetEntity=Role::class, mappedBy="film", cascade={"persist", "remove"})
+     * @Groups({"film:read"})
      */
     private $roles;
 
@@ -44,10 +52,16 @@ class Film
      */
     private $seances;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="film")
+     */
+    private $comments;
+
     public function __construct()
     {
         $this->roles = new ArrayCollection();
         $this->seances = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -112,7 +126,7 @@ class Film
     public function removeRole(Role $role): self
     {
         if ($this->roles->removeElement($role)) {
-            // set the owning side to null (unless already changed)
+            // set the owning side to null (unless alfilm:ready changed)
             if ($role->getFilm() === $this) {
                 $role->setFilm(null);
             }
@@ -142,9 +156,39 @@ class Film
     public function removeSeance(Seance $seance): self
     {
         if ($this->seances->removeElement($seance)) {
-            // set the owning side to null (unless already changed)
+            // set the owning side to null (unless alfilm:ready changed)
             if ($seance->getFilm() === $this) {
                 $seance->setFilm(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setFilm($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless alfilm:ready changed)
+            if ($comment->getFilm() === $this) {
+                $comment->setFilm(null);
             }
         }
 

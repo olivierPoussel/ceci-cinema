@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\RoleRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\RoleRepository;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=RoleRepository::class)
@@ -19,6 +20,7 @@ class Role
     
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"film:read"})
      */
     private $nom;
 
@@ -29,6 +31,7 @@ class Role
 
     /**
      * @ORM\ManyToOne(targetEntity=Acteur::class, inversedBy="roles")
+     * @Groups({"film:read"})
      */
     private $acteur;
 

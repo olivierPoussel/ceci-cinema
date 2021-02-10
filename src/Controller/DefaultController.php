@@ -13,6 +13,10 @@ class DefaultController extends AbstractController
      */
     public function index(): Response
     {
+        $this->addFlash('success', 'test success');
+        $this->addFlash('danger', 'test danger');
+        $this->addFlash('warning', 'test warning');
+
         return $this->render('default/index.html.twig', []);
     }
 }

@@ -2,13 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\RealisateurRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\RealisateurRepository;
+use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=RealisateurRepository::class)
+ * @ApiResource
  */
 class Realisateur
 {
@@ -21,11 +24,13 @@ class Realisateur
 
     /**
      * @ORM\Column(type="string", length=255)
+
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+
      */
     private $prenom;
 
@@ -89,7 +94,7 @@ class Realisateur
     public function removeFilm(Film $film): self
     {
         if ($this->films->removeElement($film)) {
-            // set the owning side to null (unless already changed)
+            // set the owning side to null (unless alfilm:ready changed)
             if ($film->getRealisateur() === $this) {
                 $film->setRealisateur(null);
             }

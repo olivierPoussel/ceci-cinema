@@ -9,5 +9,5 @@
 {% for role in acteur.roles %}
     <a href="{{path('film_detail', {id: role.film.id})}}" class="list-group-item list-group-item-action">{{role.film.titre}}</a>
 {% endfor %}
-</div>  
+</div>
 {% endblock %}

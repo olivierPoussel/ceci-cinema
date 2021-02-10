@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\ActeurRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ActeurRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ActeurRepository::class)
@@ -21,11 +22,13 @@ class Acteur
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"film:read"})
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"film:read"})
      */
     private $prenom;
 
