@@ -2,7 +2,9 @@
 
 namespace App\Repository;
 
+use App\Entity\Film;
 use App\Entity\Seance;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -19,32 +21,19 @@ class SeanceRepository extends ServiceEntityRepository
         parent::__construct($registry, Seance::class);
     }
 
-    // /**
-    //  * @return Seance[] Returns an array of Seance objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function get3NextSeance(Film $film, int $limit)
     {
+        $date = new DateTime();
+        
         return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+                ->andWhere('s.film = :film')
+                ->setParameter('film', $film)
+                ->andWhere('s.dateSeance >= :date')
+                ->setParameter('date', $date)
+                ->orderBy('s.dateSeance', 'ASC')
+                ->setMaxResults($limit)
+                ->getQuery()
+                ->getResult()
+            ;           
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Seance
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

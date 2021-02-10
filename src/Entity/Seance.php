@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use Symfony\Component\Validator\Constraints as Assert;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\SeanceRepository;
-use DateTime;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=SeanceRepository::class)
@@ -22,6 +23,7 @@ class Seance
     /**
      * 
      * @ORM\Column(type="datetime")
+     * @Groups("read")
      */
     private $dateSeance;
 
@@ -34,6 +36,7 @@ class Seance
     /**
      * 
      * @ORM\ManyToOne(targetEntity=Salle::class, inversedBy="seances")
+     * @Groups("read")
      */
     private $salle;
 

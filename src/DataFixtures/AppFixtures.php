@@ -67,11 +67,15 @@ class AppFixtures extends Fixture
         $role2->setFilm($film)->setActeur($acteur)->setNom($faker->firstName);
         $manager->persist($role2);
 
-        $seance1 = new Seance();
-        $date = DateTime::createFromFormat('Y-m-d H:i:s','2021-01-15 18:00:00');
-        $seance1->setDateSeance($date)->setFilm($film)->setSalle($salle); 
-        $manager->persist($seance1);
-        
+        $date = new DateTime();
+        for ($i=0; $i < 50 ; $i++) { 
+            $seance1 = new Seance();
+            // $date = DateTime::createFromFormat('Y-m-d H:i:s','2021-01-15 18:00:00');
+            $dateSeance = (clone $date)->modify('+'.(6 * $i).' hours');
+            $seance1->setDateSeance($dateSeance)->setFilm($film)->setSalle($salle); 
+            $manager->persist($seance1);
+        }
+        $manager->flush();
 
         $user = new User();
         $user->setEmail('user@ex.com')->setPseudo('user')->setPassword($this->encoder->encodePassword($user, 'user'));

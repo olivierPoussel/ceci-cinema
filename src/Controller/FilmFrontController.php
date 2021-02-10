@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Film;
 use App\Form\CommentFormType;
 use App\Repository\FilmRepository;
+use App\Repository\SeanceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,15 +38,30 @@ class FilmFrontController extends AbstractController
      *
      * @return Response
      */
-    public function filmDetail(Film $film)
+    public function filmDetail(Film $film, SeanceRepository $repo)
     {
         $form = $this->createForm(CommentFormType::class);
+
+        $seances = $repo->get3NextSeance($film, 3);
 
         return $this->render('film_front/film_detail.html.twig', 
             [
                 'film' => $film, 
-                'form' => $form->createView()
+                'form' => $form->createView(),
+                'seances' => $seances
             ]
         );
+    }
+
+    /**
+     * @Route("api/film/{id}/seances/next", name="next_seances", methods={"GET"})
+     *
+     * @return Response
+     */
+    public function getSeances(Film $film, SeanceRepository $repo)
+    {
+        $seances = $repo->get3NextSeance($film, 3);
+
+        return $this->json($seances, 200, [], ["groups" => ["read"]]);
     }
 }
