@@ -2,17 +2,24 @@
 
 namespace App\Entity;
 
+use App\Entity\Role;
+use App\Entity\Seance;
+use App\Entity\Comment;
+use App\Entity\Realisateur;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\FilmRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiSubresource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ORM\Entity(repositoryClass=FilmRepository::class)
  * @ApiResource(
+ *  normalizationContext={"groups"={"film:read"}},
  *  collectionOperations={"get", "post"},
  *  itemOperations={"get"}
  * )
@@ -30,6 +37,7 @@ class Film
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"film:read"})
+     * @ApiFilter(SearchFilter::class, strategy="partial")
      */
     private $titre;
 
@@ -59,7 +67,6 @@ class Film
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="film")
      * @Groups({"film:read"})
-     * @ApiSubresource(maxDepth=1)
      */
     private $comments;
 

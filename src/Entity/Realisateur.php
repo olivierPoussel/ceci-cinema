@@ -18,19 +18,20 @@ class Realisateur
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer")     
+     * @Groups({"film:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-
+     * @Groups({"film:read"})
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
-
+     * @Groups({"film:read"})
      */
     private $prenom;
 

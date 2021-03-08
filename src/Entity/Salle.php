@@ -22,7 +22,7 @@ class Salle
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups("read")
+     * @Groups({"film:read", "read"})
      */
     private $nom;
 

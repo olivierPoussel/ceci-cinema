@@ -13,14 +13,14 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class FilmFrontController extends AbstractController
 {
-    /**
-     * @Route("api/films", name="api_film_list")
-     * @return Response
-     */
-    public function apiListFilm(FilmRepository $filmRepository) :Response
-    {
-        return $this->json($filmRepository->findAll(), 200, [], ['groups' => ['film:read']]);
-    }
+    // /**
+    //  * @Route("api/films", name="api_film_list")
+    //  * @return Response
+    //  */
+    // public function apiListFilm(FilmRepository $filmRepository) :Response
+    // {
+    //     return $this->json($filmRepository->findAll(), 200, [], ['groups' => ['film:read']]);
+    // }
     /**
      * @Route("/", name="film_list")
      */

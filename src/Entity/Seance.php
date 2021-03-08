@@ -5,11 +5,23 @@ namespace App\Entity;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\SeanceRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
  * @ORM\Entity(repositoryClass=SeanceRepository::class)
+ * @ApiResource(
+ *  normalizationContext={"groups"={"read"}},
+ * subresourceOperations={
+ *     "api_film_seance_get_subresource"={
+ *         "method"="GET",
+ *         "normalization_context"={"groups"={"film:read"}}
+ *     }
+ * })
+ * @ApiFilter(SearchFilter::class, properties={"film.id": "exact"})
  */
 class Seance
 {
@@ -23,7 +35,7 @@ class Seance
     /**
      * 
      * @ORM\Column(type="datetime")
-     * @Groups("read")
+     * @Groups({"film:read", "read"})
      */
     private $dateSeance;
 
@@ -36,7 +48,7 @@ class Seance
     /**
      * 
      * @ORM\ManyToOne(targetEntity=Salle::class, inversedBy="seances")
-     * @Groups("read")
+     * @Groups({"film:read", "read"})
      */
     private $salle;
 

@@ -53,7 +53,7 @@ security:
         # - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/api/register, roles: IS_AUTHENTICATED_ANONYMOUSLY, methods: ["POST"]}
         - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api,       roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/user/new, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
