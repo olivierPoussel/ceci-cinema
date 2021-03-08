@@ -15,10 +15,10 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
  * @ORM\Entity(repositoryClass=SeanceRepository::class)
  * @ApiResource(
  *  normalizationContext={"groups"={"read"}},
- * subresourceOperations={
- *     "api_film_seance_get_subresource"={
+ *  subresourceOperations={
+ *     "api_films_seances_get_subresource"={
  *         "method"="GET",
- *         "normalization_context"={"groups"={"film:read"}}
+ *         "normalization_context"={"groups"={"film:seance:read"}}
  *     }
  * })
  * @ApiFilter(SearchFilter::class, properties={"film.id": "exact"})
@@ -35,7 +35,7 @@ class Seance
     /**
      * 
      * @ORM\Column(type="datetime")
-     * @Groups({"film:read", "read"})
+     * @Groups({"film:read", "read","film:seance:read"})
      */
     private $dateSeance;
 
@@ -48,7 +48,7 @@ class Seance
     /**
      * 
      * @ORM\ManyToOne(targetEntity=Salle::class, inversedBy="seances")
-     * @Groups({"film:read", "read"})
+     * @Groups({"film:read", "read","film:seance:read"})
      */
     private $salle;
 

@@ -61,6 +61,7 @@ class Film
 
     /**
      * @ORM\OneToMany(targetEntity=Seance::class, mappedBy="film")
+     * @ApiSubresource
      */
     private $seances;
 

@@ -17,12 +17,13 @@ class Salle
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"film:seance:read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"film:read", "read"})
+     * @Groups({"film:read", "read","film:seance:read"})
      */
     private $nom;
 
